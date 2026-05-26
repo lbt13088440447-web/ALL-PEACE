@@ -17,7 +17,7 @@ export default function App() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed top-0 inset-x-0 h-20 md:h-24 flex items-center justify-between px-6 md:px-12 z-50 pointer-events-none"
+            className="fixed top-0 inset-x-0 pt-[env(safe-area-inset-top)] h-20 md:h-24 flex items-center justify-between px-10 md:px-16 z-50 pointer-events-none"
         >
             <div className="flex items-center space-x-2 pointer-events-auto">
               <div className="w-6 h-6 md:w-8 md:h-8 rounded-full border border-white/40 flex items-center justify-center">
@@ -47,7 +47,7 @@ export default function App() {
             exit={{ opacity: 0 }}
             className="flex flex-col flex-1"
           >
-            <header className="pt-28 md:pt-32 pb-12 md:pb-16 px-6 md:px-12 max-w-7xl mx-auto w-full relative z-10 flex flex-col items-center text-center mt-8 md:mt-12">
+            <header className="pt-28 md:pt-32 pb-12 md:pb-16 px-10 md:px-16 max-w-5xl mx-auto w-full relative z-10 flex flex-col items-center text-center mt-8 md:mt-12">
                 <motion.div
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -62,7 +62,7 @@ export default function App() {
                        />
                        <span className="uppercase tracking-[0.4em] text-[9px] md:text-[10px] opacity-50">体验馆</span>
                     </div>
-                    <div className="flex flex-col items-start text-left max-w-3xl mx-auto mb-12 md:mb-16 mt-8 w-full px-4 md:px-0">
+                    <div className="flex flex-col items-start text-left max-w-3xl mx-auto mb-12 md:mb-16 mt-8 w-full px-2 md:px-0">
                         <h1 className="font-serif font-normal tracking-[0.05em] md:tracking-[0.1em] text-[1.75rem] sm:text-4xl md:text-5xl lg:text-[4rem] text-white leading-tight whitespace-nowrap">
                             <span className="block text-[#E8E8E8]">在微小的瞬间<span className="font-sans text-[0.5em] opacity-60 align-baseline mx-0.5">，</span></span>
                             <span className="block text-[#E8E8E8] ml-[10%] mt-2 md:mt-4">找到内心的平静</span>
@@ -78,7 +78,7 @@ export default function App() {
                 </motion.div>
             </header>
 
-            <main className="flex-1 px-6 md:px-12 pb-24 md:pb-32 pt-8 md:pt-12 max-w-7xl mx-auto w-full relative z-10">
+            <main className="flex-1 px-10 md:px-16 pb-[calc(6rem+env(safe-area-inset-bottom))] pt-8 md:pt-12 max-w-5xl mx-auto w-full relative z-10">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
                     {GAMES.map((game, index) => (
                         <GameCard 
