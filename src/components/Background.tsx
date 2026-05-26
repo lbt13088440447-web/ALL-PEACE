@@ -9,13 +9,51 @@ export function Background() {
   const smoothY = useSpring(mouseY, { damping: 50, stiffness: 400 });
 
   useEffect(() => {
+    let hasDeviceOrientation = false;
+
+    const handleDeviceOrientation = (e: DeviceOrientationEvent) => {
+      if (e.beta !== null && e.gamma !== null) {
+        hasDeviceOrientation = true;
+        // gamma is left/right (-90 to 90). Normalize around 0.
+        // beta is up/down (-180 to 180). Normalize around 45 (typical holding angle).
+        const x = Math.min(Math.max((e.gamma + 45) / 90, 0), 1);
+        const y = Math.min(Math.max((e.beta) / 90, 0), 1);
+        
+        mouseX.set(x);
+        mouseY.set(y);
+      }
+    };
+
     const handleMouseMove = (e: MouseEvent) => {
+      if (hasDeviceOrientation) return;
       mouseX.set(e.clientX / window.innerWidth);
       mouseY.set(e.clientY / window.innerHeight);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("deviceorientation", handleDeviceOrientation);
+
+    const requestPermission = async () => {
+      if (typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
+        try {
+          const permissionState = await (DeviceOrientationEvent as any).requestPermission();
+          if (permissionState === 'granted') {
+            window.addEventListener("deviceorientation", handleDeviceOrientation);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+    
+    // Request permission on first click for iOS 13+
+    window.addEventListener("click", requestPermission, { once: true });
+    
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("deviceorientation", handleDeviceOrientation);
+      window.removeEventListener("click", requestPermission);
+    };
   }, [mouseX, mouseY]);
 
   // Map mouse coordinates to rotation values for 3D tilt
