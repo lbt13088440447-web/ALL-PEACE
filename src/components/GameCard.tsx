@@ -63,8 +63,8 @@ export const GameCard: React.FC<GameCardProps> = ({ game, index, onClick }) => {
         
         <div className="relative z-10 flex-grow text-left flex flex-col space-y-6">
             <div>
-               <h3 className="text-sm md:text-base font-serif italic text-white/80 mb-2 truncate opacity-90">{game.subtitle}</h3>
-               <h4 className="text-xl md:text-2xl font-serif font-light tracking-[0.15em] text-white whitespace-nowrap">{game.title}</h4>
+               <h4 className="text-2xl md:text-3xl font-serif font-light tracking-[0.15em] text-white whitespace-nowrap mb-1">{game.title}</h4>
+               <h3 className="text-xs md:text-sm font-serif italic text-white/40 mb-2 truncate tracking-widest">{game.subtitle}</h3>
             </div>
             <p className="text-[11px] md:text-xs opacity-70 leading-[2.2] tracking-[0.15em] font-light text-white max-w-[95%]">
                <PunctuationText text={game.description} />

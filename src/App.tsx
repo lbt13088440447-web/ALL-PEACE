@@ -62,11 +62,17 @@ export default function App() {
                        />
                        <span className="uppercase tracking-[0.4em] text-[9px] md:text-[10px] opacity-50">体验馆</span>
                     </div>
-                    <h1 className="text-3xl md:text-5xl lg:text-[4.5rem] font-serif font-light mb-8 md:mb-10 leading-[1.4] md:leading-[1.3] max-w-4xl tracking-widest text-center mt-4">
-                        <span className="block italic opacity-90 mb-4 tracking-[0.05em] text-[#E8E8E8]">Find calm in the micro moments<span className="font-sans text-[0.6em] opacity-40 align-baseline ml-1">.</span></span>
-                        <span className="block tracking-[0.15em] mt-6 opacity-80 text-2xl md:text-4xl text-white">在微小的瞬间<span className="font-sans text-[0.5em] opacity-40 align-baseline mx-0.5">，</span>找到内心的平静<span className="font-sans text-[0.5em] opacity-40 align-baseline ml-0.5">。</span></span>
-                    </h1>
-                    <p className="text-[11px] md:text-[13px] tracking-[0.2em] md:tracking-[0.25em] uppercase opacity-70 max-w-2xl leading-[2.2] mt-4 font-light">
+                    <div className="flex flex-col items-start text-left max-w-3xl mx-auto mb-12 md:mb-16 mt-8 w-full px-4 md:px-0">
+                        <h1 className="font-serif font-normal tracking-[0.05em] md:tracking-[0.1em] text-[1.75rem] sm:text-4xl md:text-5xl lg:text-[4rem] text-white leading-tight whitespace-nowrap">
+                            <span className="block text-[#E8E8E8]">在微小的瞬间<span className="font-sans text-[0.5em] opacity-60 align-baseline mx-0.5">，</span></span>
+                            <span className="block text-[#E8E8E8] ml-[10%] mt-2 md:mt-4">找到内心的平静</span>
+                        </h1>
+                        <h2 className="font-serif italic font-light tracking-[0.05em] text-[1.35rem] sm:text-3xl md:text-4xl lg:text-[3.5rem] text-white/60 leading-tight mt-6 md:mt-10 self-end text-right mr-[5%] whitespace-nowrap">
+                            <span className="block">In Tiny Moments,</span>
+                            <span className="block mt-2 md:mt-4">Find Inner Peace</span>
+                        </h2>
+                    </div>
+                    <p className="text-[11px] md:text-[13px] tracking-[0.2em] md:tracking-[0.25em] uppercase opacity-70 max-w-2xl text-center leading-[2.2] mt-8 font-light">
                         一个探索感官的互动体验集<span className="font-sans text-[0.6em] align-baseline mx-0.5 opacity-60">，</span>通过视觉<span className="font-sans text-[0.6em] align-baseline mx-0.5 opacity-60">、</span>听觉与触觉<span className="font-sans text-[0.6em] align-baseline mx-0.5 opacity-60">，</span>帮助您沉淀思绪<span className="font-sans text-[0.6em] align-baseline ml-0.5 opacity-60">。</span>
                     </p>
                 </motion.div>
