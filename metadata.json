@@ -1,0 +1,6 @@
+{
+  "name": "Mindful Play",
+  "description": "A mindful mini-game directory with soft gradients and breathing micro-interactions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
