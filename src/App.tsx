@@ -7,6 +7,7 @@ import { X } from "lucide-react";
 
 export default function App() {
   const [activeGame, setActiveGame] = useState<string | null>(null);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   return (
     <>
@@ -38,9 +39,9 @@ export default function App() {
               <a href="#" className="hover:text-white transition-colors">
                 目录
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <button onClick={(e) => { e.preventDefault(); setIsAboutOpen(true); }} className="hover:text-white transition-colors">
                 关于
-              </a>
+              </button>
             </div>
           )}
         </motion.nav>
@@ -85,9 +86,9 @@ export default function App() {
                       找到内心的平静
                     </span>
                   </h1>
-                  <h2 className="font-serif italic font-light tracking-[0.05em] text-[1.35rem] sm:text-3xl md:text-4xl lg:text-[3.5rem] text-white/60 leading-tight mt-6 md:mt-10 self-end text-right mr-[5%] whitespace-nowrap">
+                  <h2 className="font-serif italic font-light tracking-[0.05em] text-[1rem] sm:text-xl md:text-2xl lg:text-[2.25rem] text-white/50 leading-tight mt-4 md:mt-6 self-end text-right mr-[15%] whitespace-nowrap">
                     <span className="block">In Tiny Moments,</span>
-                    <span className="block mt-2 md:mt-4">Find Inner Peace</span>
+                    <span className="block mt-1 md:mt-2">Find Inner Peace</span>
                   </h2>
                 </div>
                 <p className="text-[11px] md:text-[13px] tracking-[0.2em] md:tracking-[0.25em] uppercase opacity-70 max-w-2xl text-center leading-[2.2] mt-8 font-light">
@@ -155,7 +156,54 @@ export default function App() {
         )}
 
         {/* Active game renders can go here if any remain */}
-        <AnimatePresence></AnimatePresence>
+        <AnimatePresence>
+          {isAboutOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-md pointer-events-auto"
+              onClick={() => setIsAboutOpen(false)}
+            >
+              <motion.div
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 20, scale: 0.95 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="relative w-full max-w-lg bg-black/40 backdrop-blur-xl border border-white/10 p-10 md:p-14 shadow-2xl overflow-hidden"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 blur-[80px] rounded-full mix-blend-screen pointer-events-none translate-x-1/2 -translate-y-1/2" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-teal-500/10 blur-[80px] rounded-full mix-blend-screen pointer-events-none -translate-x-1/2 translate-y-1/2" />
+                
+                <button
+                  onClick={() => setIsAboutOpen(false)}
+                  className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors z-10"
+                >
+                  <X size={18} className="opacity-70" />
+                </button>
+
+                <div className="relative z-10">
+                  <h3 className="text-2xl md:text-3xl font-serif font-light tracking-[0.15em] mb-8 text-[#E8E8E8]">关于项目</h3>
+                  <div className="space-y-6 text-[13px] md:text-sm font-light tracking-[0.1em] md:tracking-[0.15em] leading-[2.2] opacity-70">
+                    <p>
+                      「正念空间」是一个探索数字感官与内心平静的互动实验项目<span className="font-sans text-[0.6em] align-baseline mx-0.5 opacity-60">。</span>
+                    </p>
+                    <p>
+                      在这个充满噪音与加速的时代<span className="font-sans text-[0.6em] align-baseline mx-0.5 opacity-60">，</span>我们往往忽略了身体最细微的感受<span className="font-sans text-[0.6em] align-baseline mx-0.5 opacity-60">。</span>本项目通过视觉的呼吸<span className="font-sans text-[0.6em] align-baseline mx-0.5 opacity-60">、</span>听觉的共鸣<span className="font-sans text-[0.6em] align-baseline mx-0.5 opacity-60">，</span>以及触觉的沉浸交互<span className="font-sans text-[0.6em] align-baseline mx-0.5 opacity-60">，</span>试图创造一个能在微小的瞬间让人停下脚步的数字庇护所<span className="font-sans text-[0.6em] align-baseline ml-0.5 opacity-60">。</span>
+                    </p>
+                    <p>
+                      通过这些简单的互动<span className="font-sans text-[0.6em] align-baseline mx-0.5 opacity-60">，</span>希望能帮助您在繁忙中找回片刻的专注与宁静<span className="font-sans text-[0.6em] align-baseline ml-0.5 opacity-60">。</span>
+                    </p>
+                  </div>
+                  <div className="pt-10 mt-10 border-t border-white/10 flex flex-col items-center">
+                    <span className="text-[9px] tracking-[0.3em] opacity-40 uppercase">Mindful Space Project</span>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </>
   );
