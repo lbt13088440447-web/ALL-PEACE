@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", "HarmonyOS Sans", "HarmonyOS Sans SC", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", "Noto Serif SC", ui-serif, Georgia, serif;
 }
 
