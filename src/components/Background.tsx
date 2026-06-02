@@ -3,8 +3,12 @@ import { useEffect, useMemo, useState } from "react";
 
 export function Background() {
   const { scrollY } = useScroll();
-  // Use a smoother spring for the scroll response
-  const smoothScrollY = useSpring(scrollY, { damping: 40, stiffness: 200 });
+  // Use a faster, smoother spring for the scroll response to reduce delay
+  const smoothScrollY = useSpring(scrollY, {
+    damping: 40,
+    stiffness: 400,
+    mass: 0.2,
+  });
 
   const [vh, setVh] = useState(800);
   useEffect(() => {
@@ -16,10 +20,6 @@ export function Background() {
 
   // Move upwards
   const orbY = useTransform(smoothScrollY, [0, vh * 0.5], [0, -vh * 0.5 - 50]);
-  // Widen as it reaches the top
-  const orbScaleX = useTransform(smoothScrollY, [0, vh * 0.4], [1, 3.5]);
-  // Compress as it hits the top edge
-  const orbScaleY = useTransform(smoothScrollY, [0, vh * 0.4], [1, 0.1]);
   // Fade out the sharp glass parts
   const glassOpacity = useTransform(smoothScrollY, [0, vh * 0.3], [1, 0]);
 
@@ -84,8 +84,6 @@ export function Background() {
         className="absolute w-40 h-40 md:w-56 md:h-56 flex items-center justify-center mix-blend-screen"
         style={{
           y: orbY,
-          scaleX: orbScaleX,
-          scaleY: orbScaleY,
           willChange: "transform",
         }}
       >
