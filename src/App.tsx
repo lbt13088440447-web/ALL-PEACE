@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Background } from "./components/Background";
 import { GameCard } from "./components/GameCard";
 import { GAMES } from "./data/games";
-import { X } from "lucide-react";
+import { X, ChevronRight } from "lucide-react";
 
 export default function App() {
   const [activeGame, setActiveGame] = useState<string | null>(null);
@@ -144,12 +144,12 @@ export default function App() {
                             "https://zennmix.netlify.app/");
                       } else if (id === "vision") {
                         window.open(
-                          "https://blink66.netlify.app",
+                          "https://chic-cascaron-566930.netlify.app",
                           "_blank",
                           "noreferrer,noopener",
                         ) ||
                           (window.location.href =
-                            "https://blink66.netlify.app");
+                            "https://chic-cascaron-566930.netlify.app");
                       } else {
                         setActiveGame(id);
                       }
@@ -160,6 +160,20 @@ export default function App() {
             </main>
           </motion.div>
         )}
+
+        {/* Edge Swipe Hint */}
+        <motion.div
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: [0, 0.6, 0], x: [-5, 5, -5] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", repeatDelay: 1.5 }}
+          className="fixed left-0 top-1/2 -translate-y-1/2 flex items-center pointer-events-none z-40 mix-blend-screen"
+        >
+          <div className="w-1 h-32 md:h-48 bg-gradient-to-b from-transparent via-white/10 to-transparent rounded-r-full shadow-[0_0_15px_rgba(255,255,255,0.2)]"></div>
+          <ChevronRight size={14} className="text-white/30 ml-2" />
+          <span className="text-[9px] tracking-[0.3em] text-white/30 ml-1 opacity-70" style={{ writingMode: 'vertical-rl' }}>
+            边缘滑动返回
+          </span>
+        </motion.div>
 
         {/* Active game renders can go here if any remain */}
         <AnimatePresence>

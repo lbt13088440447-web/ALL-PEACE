@@ -20,7 +20,7 @@ export const GAMES: Game[] = [
     id: "vision",
     title: "历历在目",
     subtitle: "Visionary Glimpse",
-    description: "通过长按屏幕且闭上双眼，在黑暗中遇见属于你的灵感警句。",
+    description: "眨眼互动一睁眼一闭眼快速粉碎忘却，两秒以上默念铭记",
     icon: Sparkles,
   },
   {
