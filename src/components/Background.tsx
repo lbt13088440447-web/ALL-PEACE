@@ -18,10 +18,23 @@ export function Background() {
     return () => window.removeEventListener("resize", updateVh);
   }, []);
 
-  // Move upwards
-  const orbY = useTransform(smoothScrollY, [0, vh * 0.5], [0, -vh * 0.5 - 50]);
   // Fade out the sharp glass parts
   const glassOpacity = useTransform(smoothScrollY, [0, vh * 0.3], [1, 0]);
+
+  // Generate flying droplets that occasionally get sucked into the center
+  const droplets = useMemo(() => {
+    return Array.from({ length: 15 }).map((_, i) => {
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 150 + Math.random() * 200;
+      const startX = Math.cos(angle) * distance;
+      const startY = Math.sin(angle) * distance;
+      const size = 3 + Math.random() * 5;
+      const duration = 2.5 + Math.random() * 2;
+      const delay = Math.random() * 8;
+
+      return { id: i, startX, startY, size, duration, delay };
+    });
+  }, []);
 
   // Generate a geometric dot grid constraint to the viewport bounds
   const dots = useMemo(() => {
@@ -83,10 +96,42 @@ export function Background() {
       <motion.div
         className="absolute w-40 h-40 md:w-56 md:h-56 flex items-center justify-center mix-blend-screen"
         style={{
-          y: orbY,
           willChange: "transform",
         }}
+        animate={{
+          y: [-15, 15, -15],
+          x: [-10, 10, -10],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
       >
+        {/* Flying Droplets */}
+        <motion.div style={{ opacity: glassOpacity, pointerEvents: "none" }} className="absolute inset-0 flex items-center justify-center">
+          {droplets.map((d) => (
+            <motion.div
+              key={d.id}
+              className="absolute rounded-full bg-teal-400/40 mix-blend-screen pointer-events-none shadow-[0_0_6px_rgba(45,212,191,0.3)]"
+              style={{ width: d.size, height: d.size, willChange: "transform, opacity" }}
+              initial={{ x: d.startX, y: d.startY, scale: 0, opacity: 0 }}
+              animate={{
+                x: [d.startX, d.startX * 0.4, 0],
+                y: [d.startY, d.startY * 0.4, 0],
+                scale: [0, 1, 0],
+                opacity: [0, 0.4, 0],
+              }}
+              transition={{
+                duration: d.duration,
+                repeat: Infinity,
+                delay: d.delay,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </motion.div>
+
         {/* Deep background glow */}
         <motion.div
           className="absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-full blur-[100px] bg-indigo-500/20 mix-blend-screen"
